@@ -21,19 +21,16 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "asp.car.app v1");
-        c.RoutePrefix = string.Empty; // чтобы Swagger UI был доступен по корневому URL
+        c.RoutePrefix = string.Empty; // Swagger UI по корневому URL
     });
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

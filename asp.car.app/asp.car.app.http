@@ -1,4 +1,4 @@
-@asp.car.app_HostAddress = http://localhost:5180
+@asp.car.app_HostAddress = http://localhost:5079
 
 GET {{asp.car.app_HostAddress}}/weatherforecast/
 Accept: application/json

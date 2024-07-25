@@ -11,7 +11,7 @@ using asp.car.app.Models;
 namespace asp.car.app.Migrations
 {
     [DbContext(typeof(AspTestContext))]
-    [Migration("20240724191127_InitialCreate")]
+    [Migration("20240724232258_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
