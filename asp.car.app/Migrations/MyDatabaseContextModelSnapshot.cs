@@ -9,8 +9,8 @@ using asp.car.app.Models;
 
 namespace asp.car.app.Migrations
 {
-    [DbContext(typeof(AspTestContext))]
-    partial class AspTestContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(MyDatabaseContext))]
+    partial class MyDatabaseContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -55,10 +55,6 @@ namespace asp.car.app.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ColorId");
-
-                    b.HasIndex("MakeId");
-
                     b.ToTable("Cars");
                 });
 
@@ -96,25 +92,6 @@ namespace asp.car.app.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Makes");
-                });
-
-            modelBuilder.Entity("asp.car.app.Models.Car", b =>
-                {
-                    b.HasOne("asp.car.app.Models.Color", "Color")
-                        .WithMany()
-                        .HasForeignKey("ColorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("asp.car.app.Models.Make", "Make")
-                        .WithMany()
-                        .HasForeignKey("MakeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Color");
-
-                    b.Navigation("Make");
                 });
 #pragma warning restore 612, 618
         }

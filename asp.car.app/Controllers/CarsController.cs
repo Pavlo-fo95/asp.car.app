@@ -5,15 +5,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using asp.car.app.Models;
 
+
 namespace asp.car.app.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class CarsController : ControllerBase
     {
-        private readonly AspTestContext _context;
+        private readonly MyDatabaseContext _context;
 
-        public CarsController(AspTestContext context)
+        public CarsController(MyDatabaseContext context)
         {
             _context = context;
         }
@@ -22,14 +23,14 @@ namespace asp.car.app.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Car>>> GetCars()
         {
-            return await _context.Cars.Include(c => c.Make).Include(c => c.Color).ToListAsync();
+            return await _context.Cars.ToListAsync();
         }
 
         // GET: api/Cars/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Car>> GetCar(int id)
         {
-            var car = await _context.Cars.Include(c => c.Make).Include(c => c.Color).FirstOrDefaultAsync(c => c.Id == id);
+            var car = await _context.Cars.FindAsync(id);
 
             if (car == null)
             {
@@ -92,7 +93,26 @@ namespace asp.car.app.Controllers
             _context.Cars.Remove(car);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return NotFound($"mark by {id} is deleted from SqlDb");
+        }
+
+        // New method for adding a car with fixed values
+        [HttpPost("add-fixed")]
+        public async Task<ActionResult<Car>> AddFixedCar()
+        {
+            var newCar = new Car
+            {
+                Model = "BMW X3",
+                MakeId = 1,
+                ColorId = 1,
+                EngineVolume = 2.0m,
+                Vin = "5UXWX9C34H0W67034",
+                LicensePlate = "AE4000IT"
+            };
+            _context.Cars.Add(newCar);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetCar), new { id = newCar.Id }, newCar);
         }
 
         private bool CarExists(int id)

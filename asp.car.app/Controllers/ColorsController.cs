@@ -11,9 +11,9 @@ namespace asp.car.app.Controllers
     [ApiController]
     public class ColorsController : ControllerBase
     {
-        private readonly AspTestContext _context;
+        private readonly MyDatabaseContext _context;
 
-        public ColorsController(AspTestContext context)
+        public ColorsController(MyDatabaseContext context)
         {
             _context = context;
         }

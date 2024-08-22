@@ -5,15 +5,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using asp.car.app.Models;
 
+
 namespace asp.car.app.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class MakesController : ControllerBase
     {
-        private readonly AspTestContext _context;
+        private readonly MyDatabaseContext _context;
 
-        public MakesController(AspTestContext context)
+        public MakesController(MyDatabaseContext context)
         {
             _context = context;
         }

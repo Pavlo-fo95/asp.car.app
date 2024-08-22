@@ -2,9 +2,9 @@
 
 namespace asp.car.app.Models
 {
-    public class AspTestContext : DbContext
+    public class MyDatabaseContext : DbContext
     {
-        public AspTestContext(DbContextOptions<AspTestContext> options)
+        public MyDatabaseContext(DbContextOptions<MyDatabaseContext> options)
             : base(options)
         {
         }

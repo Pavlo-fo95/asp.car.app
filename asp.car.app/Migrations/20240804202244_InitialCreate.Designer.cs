@@ -10,8 +10,8 @@ using asp.car.app.Models;
 
 namespace asp.car.app.Migrations
 {
-    [DbContext(typeof(AspTestContext))]
-    [Migration("20240724232258_InitialCreate")]
+    [DbContext(typeof(MyDatabaseContext))]
+    [Migration("20240804202244_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -58,10 +58,6 @@ namespace asp.car.app.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ColorId");
-
-                    b.HasIndex("MakeId");
-
                     b.ToTable("Cars");
                 });
 
@@ -99,25 +95,6 @@ namespace asp.car.app.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Makes");
-                });
-
-            modelBuilder.Entity("asp.car.app.Models.Car", b =>
-                {
-                    b.HasOne("asp.car.app.Models.Color", "Color")
-                        .WithMany()
-                        .HasForeignKey("ColorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("asp.car.app.Models.Make", "Make")
-                        .WithMany()
-                        .HasForeignKey("MakeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Color");
-
-                    b.Navigation("Make");
                 });
 #pragma warning restore 612, 618
         }
